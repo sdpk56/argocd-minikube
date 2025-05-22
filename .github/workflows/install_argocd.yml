@@ -1,6 +1,7 @@
 name: Install ArgoCD on Minikube
 
 on:
+  push:
   workflow_dispatch:
 
 jobs:
