@@ -12,11 +12,8 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v3
 
-      - name: Install kubectl
-        run: |
-          curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" --validate=false
-          chmod +x kubectl
-          sudo mv kubectl /usr/local/bin/
+      - uses: azure/setup-kubectl@v4
+        id: install
 
       - name: Create argocd namespace
         run: |
@@ -24,7 +21,7 @@ jobs:
 
       - name: Install ArgoCD
         run: |
-          kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml --validate=false
+          kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 
       - name: Wait for ArgoCD server to be ready
         run: |
