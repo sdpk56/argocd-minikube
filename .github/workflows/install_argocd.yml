@@ -15,16 +15,9 @@ jobs:
       - uses: azure/setup-kubectl@v4
         id: install
 
-      - name: Load Kubeconfig
+      - name: Set up Kubeconfig & Certs
         run: |
-          mkdir -p ~/.kube
-          echo "$KUBECONFIG_CONTENT" > ~/.kube/config
-
-      - name: Set up Kubeconfig
-        run: |
-          export KUBECONFIG=$HOME/.kube/config
-          minikube update-context
-
+          kubectl config use-context minikube
 
       - name: Create argocd namespace
         run: |
