@@ -15,17 +15,13 @@ jobs:
       - uses: azure/setup-kubectl@v4
         id: install
 
-      - name: Set up Kubeconfig & Certs
-        run: |
-          kubectl config use-context minikube
-
       - name: Create argocd namespace
         run: |
           kubectl create namespace argocd || echo "Namespace exists"
 
       - name: Install ArgoCD
         run: |
-          kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml --validate=false
+          kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 
       - name: Wait for ArgoCD server to be ready
         run: |
