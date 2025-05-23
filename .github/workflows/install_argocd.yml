@@ -20,6 +20,12 @@ jobs:
           mkdir -p ~/.kube
           echo "$KUBECONFIG_CONTENT" > ~/.kube/config
 
+      - name: Set up Kubeconfig
+        run: |
+          export KUBECONFIG=$HOME/.kube/config
+          minikube update-context
+
+
       - name: Create argocd namespace
         run: |
           kubectl create namespace argocd || echo "Namespace exists"
