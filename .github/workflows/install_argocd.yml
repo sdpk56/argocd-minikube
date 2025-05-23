@@ -15,6 +15,10 @@ jobs:
       - uses: azure/setup-kubectl@v4
         id: install
 
+      - name: Set up Kubeconfig for Minikube
+        run: |
+          minikube update-context
+
       - name: Create argocd namespace
         run: |
           kubectl create namespace argocd || echo "Namespace exists"
