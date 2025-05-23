@@ -15,13 +15,18 @@ jobs:
       - uses: azure/setup-kubectl@v4
         id: install
 
+      - name: Load Kubeconfig
+        run: |
+          mkdir -p ~/.kube
+          echo "$KUBECONFIG_CONTENT" > ~/.kube/config
+
       - name: Create argocd namespace
         run: |
           kubectl create namespace argocd || echo "Namespace exists"
 
       - name: Install ArgoCD
         run: |
-          kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml --insecure-skip-tls-verify
+          kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml --validate=falseSS
 
       - name: Wait for ArgoCD server to be ready
         run: |
