@@ -6,7 +6,7 @@ on:
 
 jobs:
   install-argocd:
-    runs-on: [self-hosted, linux]  # ARC runner inside Minikube
+    runs-on: [self-hosted]  # ARC runner inside Minikube
 
     steps:
       - name: Checkout Repo
