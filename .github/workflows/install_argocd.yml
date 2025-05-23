@@ -26,7 +26,7 @@ jobs:
 
       - name: Install ArgoCD
         run: |
-          kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml --validate=falseSS
+          kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 
       - name: Wait for ArgoCD server to be ready
         run: |
