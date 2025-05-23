@@ -6,7 +6,7 @@ on:
 
 jobs:
   install-argocd:
-    runs-on: [self-hosted, Windows]  # ARC runner inside Minikube
+    runs-on: [self-hosted, Linux]  # ARC runner inside Minikube
 
     steps:
       - name: Checkout Repo
@@ -15,9 +15,9 @@ jobs:
       - uses: azure/setup-kubectl@v4
         id: install
 
-      - name: Set up Kubeconfig for Minikube
-        run: |
-          minikube update-context
+      # - name: Set up Kubeconfig for Minikube
+      #   run: |
+      #     minikube update-context
 
       - name: Create argocd namespace
         run: |
@@ -47,5 +47,3 @@ jobs:
 
           echo "🌐 Access URL:"
           minikube service argocd-server -n argocd --url
-
-          #
